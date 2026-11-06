@@ -110,11 +110,37 @@
     position: relative;
     z-index: 1;
     width: 100%;
+    max-width: 1280px;
     padding: clamp(64px, 9vh, 88px) var(--pad-right) 120px var(--pad-left);
+    display: grid;
+    grid-template-columns: minmax(0, 600px) auto;
+    align-items: start;
+    column-gap: clamp(24px, 5vw, 72px);
+  }
+
+  .text {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 48px;
+  }
+
+  /* The portrait always sits to the right of the name and shrinks with the window; it never moves. */
+  .portrait {
+    width: clamp(96px, 18vw, 260px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: 0 0 0 1px #2a3538;
+  }
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05) brightness(0.82);
   }
 
   .title { display: flex; flex-direction: column; gap: 10px; }
@@ -196,7 +222,10 @@
 
   @media (max-width: 600px) {
     :root { --pad-left: 24px; --pad-right: 24px; }
-    main { gap: 40px; padding-top: 64px; }
+    main { display: block; padding-top: 56px; }
+    .text { gap: 40px; }
+    .title { padding-right: 112px; }
+    .portrait { position: absolute; top: 56px; right: 24px; width: 88px; }
     h1 { font-size: 32px; }
     .tagline { font-size: 18px; }
     .about p { font-size: 16px; }
@@ -207,8 +236,10 @@
     footer { padding-top: 48px; padding-bottom: 24px; font-size: 11px; }
   }
 
-  @media (min-width: 601px) and (max-height: 880px) {
-    main { gap: 28px; padding-top: 44px; padding-bottom: 96px; }
+  @media (min-width: 601px) and (max-height: 940px) {
+    main { padding-top: 44px; padding-bottom: 96px; }
+    .text { gap: 28px; }
+    .portrait { width: clamp(96px, 16vw, 220px); }
     h1 { font-size: 44px; }
     .tagline { font-size: 20px; }
     .title { gap: 6px; }
@@ -241,6 +272,7 @@
 </div>
 
 <main>
+  <div class="text">
   <div class="title">
     <h1>Elias Lindholm</h1>
     <p class="tagline">Technology leadership.</p>
@@ -262,6 +294,11 @@
   </section>
 
   <p class="contact"><a href="https://www.linkedin.com/in/elias-lindholm-1339ba1/" rel="me">LinkedIn</a></p>
+  </div>
+
+  <div class="portrait">
+    <img src="portrait.jpg" alt="Elias Lindholm" width="900" height="900">
+  </div>
 </main>
 
 <footer>
