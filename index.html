@@ -35,7 +35,12 @@
 
   * { box-sizing: border-box; }
 
-  html { background: var(--bg); }
+  html {
+    background: var(--bg);
+    /* Stops iOS Safari from inflating small text when the phone turns to landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 
   body {
     margin: 0;
